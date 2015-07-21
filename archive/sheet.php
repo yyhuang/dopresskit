@@ -603,28 +603,32 @@ if( file_exists($game."/images/images.zip") )
 	echo '<a href="'. $game .'/images/images.zip"><div class="uk-alert">'. tl('download all screenshots & photos as .zip (%s)', $filesize) .'</div></a>';
 }
 
-echo '<div class="uk-grid images">';
+$img_entries = array();
 if ($handle = opendir($game.'/images'))
 {
-	$found = 0;
 	/* This is the correct way to loop over the directory. */
 	while (false !== ($entry = readdir($handle)))
 	{
-		if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" )
+		if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" || substr($entry,-4) == ".jpg" )
 		{
 			if( substr($entry,0,4) != "logo" && substr($entry,0,4) != "icon" && substr($entry,0,6) != "header" )
 			{	
-				echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/'.$entry.'" alt="'.$entry.'" /></a></div>';
-				$found++;
+                $img_entries[] = $entry;
 			}
 		}
 	}
 }
-echo '</div>';
-
 closedir($handle);
 
-if ($found == 0) {
+sort($img_entries);
+echo '<div class="uk-grid images">';
+foreach($img_entries as $entry)
+{
+    echo '<div class="uk-width-medium-1-2"><a href="'. $game .'/images/'. $entry .'"><img src="'. $game .'/images/'.$entry.'" alt="'.$entry.'" /></a></div>';
+}
+echo '</div>';
+
+if (count($img_entries) == 0) {
 	echo '<p class="images-text">'. tlHtml('There are currently no screenshots available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 					

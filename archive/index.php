@@ -447,24 +447,31 @@ if( file_exists("images/images.zip") )
 	echo '<a href="images/images.zip"><div class="uk-alert">'. tl('download all screenshots & photos as .zip (%s)', $filesize) .'</div></a>';
 }
 
-echo '<div class="uk-grid images">';
+$img_entries = array();
 if ($handle = opendir('images'))
 {
 	/* This is the correct way to loop over the directory. */
 	while (false !== ($entry = readdir($handle)))
 	{
-		if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" )
+		if( substr($entry,-4) == ".png" || substr($entry,-4) == ".gif" || substr($entry,-4) == ".jpg" )
 		{
 			if( substr($entry,0,4) != "logo" && substr($entry,0,4) != "icon" && substr($entry,0,6) != "header" )
 			{	
-				echo '<div class="uk-width-medium-1-2"><a href="images/'. $entry .'"><img src="images/'.$entry.'" alt="'.$entry.'" /></a></div>';
+                $img_entries[] = $entry;
 			}
 		}
 	}
 }
+closedir($handle);
+
+sort($img_entries);
+echo '<div class="uk-grid images">';
+foreach($img_entries as $entry)
+{
+    echo '<div class="uk-width-medium-1-2"><a href="images/'. $entry .'"><img src="images/'.$entry.'" alt="'.$entry.'" /></a></div>';
+}
 echo '</div>';
 
-closedir($handle);
 
 echo '					<p class="images-text">'. tlHtml('There are far more images available for %s, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!', COMPANY_TITLE) .'</p>
 
