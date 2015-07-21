@@ -189,6 +189,13 @@ foreach( $xml->children() as $child )
 		case("description"):
 			define("GAME_DESCRIPTION", $child);
 			break;
+        case("descriptions"):
+            $descriptions = array();
+            foreach( $child->children() as $subchild )
+            {
+                $descriptions[] = $subchild;
+            }
+            break;
 		case("history"):
 			define("GAME_HISTORY", $child);
 			break;
@@ -467,22 +474,16 @@ else
 echo'							</p>
 						</div>
 						<div class="uk-width-medium-4-6">
-							<h2 id="description">'. tl('Description'). '</h2>
-							<p>'. GAME_DESCRIPTION .'</p>
-							<h2 id="history">'. tl('History'). '</h2>';
-
-for( $i = 0; $i < count($histories); $i++ )
-{
-	$header = $text ="";
-
-	foreach( $histories[$i]['history']->children() as $child )
-	{
-		if( $child->getName() == "header" ) $header = $child;
-		else if( $child->getName() == "text" ) $text = $child;
-	}
-	echo '<strong>'.$header.'</strong>
-<p>'.$text.'</p>';
+							<h2 id="description">'. tl('Description'). '</h2>';
+if( defined("GAME_DESCRIPTION") ) {
+    echo '<p>'. GAME_DESCRIPTION .'</p>';
 }
+
+foreach($descriptions as $text) {
+	echo '<p>'.$text.'</p>';
+}
+
+echo'<h2 id="history">'. tl('History'). '</h2>';
 
 if( defined("GAME_HISTORY") ) {
 	echo '<p>'. GAME_HISTORY .'</p>';
