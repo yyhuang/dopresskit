@@ -839,7 +839,10 @@ if( $monetize >= 1 )
 }
 
 
-echo '					<h2 id="links">'. tl('Additional Links'). '</h2>';
+if( count($additionals) > 0 )
+{
+    echo '					<h2 id="links">'. tl('Additional Links'). '</h2>';
+}
 		
 for( $i = 0; $i < count($additionals); $i++ )
 {
