@@ -292,19 +292,25 @@ for( $i = 0; $i < count($socials); $i++ )
 	echo( '<a href="http://'.parseLink($link).'">'.$name.'</a><br/>' );
 }
 
-echo '							</p>
-							<p>
-							<strong>'. tl('Releases:') .'</strong><br />';
+echo '							</p>';
 
+$project_entries = array();
 if ($handle = opendir('.')) {
 	while (false !== ($entry = readdir($handle))) {
 		if ($entry != "." && $entry != ".." && $entry != "lang" && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
-			echo '<a href="sheet.php?p='.$entry . str_replace('?', '&', $languageQuery).'">'.ucwords(str_replace("_", " ", $entry)).'</a><br />';
+            $project_entries[] = $entry;
 		}
 	}
 }
 closedir($handle);
 
+sort($project_entries);
+echo '						<p>
+							<strong>'. tl('Releases:') .'</strong><br />';
+foreach($project_entries as $entry)
+{
+    echo '<a href="sheet.php?p='.$entry . str_replace('?', '&', $languageQuery).'">'.ucwords(str_replace("_", " ", $entry)).'</a><br />';
+}
 echo '							</p>
 							<p>';
 
@@ -344,14 +350,10 @@ for( $i = 0; $i < count($histories); $i++ )
 echo '							<h2 id="projects">'. tl('Projects') .'</h2>
 							<ul>';
 
-if ($handle = opendir('.')) {
-	while (false !== ($entry = readdir($handle))) {
-		if ($entry != "." && $entry != ".." && $entry != "lang" && substr($entry,0,1) != "_" && strpos($entry, ".") === FALSE && substr($entry,-4) != ".log" && substr($entry,0,6) != "images" && substr($entry,0,8) != "trailers" && substr($entry,0,9) != "error_log") {
-			echo '<li><a href="sheet.php?p='.$entry. str_replace('?', '&', $languageQuery).'">'.ucwords(str_replace("_", " ", $entry)).'</a></li>';
-		}
-	}
+foreach($project_entries as $entry)
+{
+    echo '<li><a href="sheet.php?p='.$entry. str_replace('?', '&', $languageQuery).'">'.ucwords(str_replace("_", " ", $entry)).'</a></li>';
 }
-closedir($handle);
 
 echo '							</ul>
 						</div>
