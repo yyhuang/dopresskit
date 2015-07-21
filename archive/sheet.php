@@ -389,8 +389,7 @@ if (count(TranslateTool::getLanguages()) > 1) {
 echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
                         <li><a href="#description">'. tl('Description') .'</a></li>';
 if( defined("GAME_HISTORY") ) echo('<li><a href="#history">'. tl('History') .'</a></li>');
-echo '					<li><a href="#projects">'. tl('Projects') .'</a></li>
-						<li><a href="#trailers">'. tl('Videos') .'</a></li>
+echo '					<li><a href="#trailers">'. tl('Videos') .'</a></li>
 						<li><a href="#images">'. tl('Images') .'</a></li>
 						<li><a href="#logo">'. tl('Logo & Icon') .'</a></li>';
 if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">'. tl('Awards & Recognition') .'</a></li>');
