@@ -665,10 +665,10 @@ if( !file_exists($game.'/images/logo.png') && !file_exists($game.'/images/icon.p
 	echo '<p>'. tlHtml('There are currently no logos or icons available for %s. Check back later for more or <a href="#contact">contact us</a> for specific requests!', GAME_TITLE) .'</p>';
 }
 
-echo '<hr>';
 
 if( count( $promoterawards ) + count( $awards ) > 0 )
 {
+    echo '<hr>';
 	echo('<h2 id="awards">'. tl('Awards & Recognition') .'</h2>');
 	echo('<ul>');
 
@@ -711,7 +711,6 @@ if( count( $promoterawards ) + count( $awards ) > 0 )
 	}
 	
 	echo '</ul>';
-	echo '<hr>';
 }
 
 if( count($promoterquotes) + count($quotes) > 0 )
@@ -766,12 +765,12 @@ if( count($promoterquotes) + count($quotes) > 0 )
 	}
 	
 	echo '</ul>';
-	echo '<hr>';
 }
 
 
 if( $press_request == TRUE )
 {
+	echo '<hr>';
 	echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
 	echo '<p>'. tl("Please fill in your e-mail address below to complete a distribute() request and we'll get back to you as soon as a press copy is available for you.") .'<br/>';
 	echo '<div id="mailform">';
@@ -781,17 +780,15 @@ if( $press_request == TRUE )
 	echo '<input type="submit" class="uk-button" id="submit-button" value="'. tl('request a press copy') .'" style="width:100%;"></input>';
 	echo '<p>'. tlHtml('Alternatively, you can always request a press copy by <a href="#contact">sending us a quick email</a>.').'</p>';
 	echo '</div>';
-	echo '<hr>';
 } else {
+	echo '<hr>';
 	if( $press_request_fail == TRUE ) {
 		echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
 		echo '<p>'.$press_request_fail_msg.'</p>';
-		echo '<hr>';
 	}
 	if( $press_request_outdated_warning == TRUE ) {
 		echo '<h2 id="preview">'.tl('Request Press Copy').'</h2>';
 		echo '<p>'.tl("We are afraid this developer has not upgraded their presskit() to use distribute(). For security purposes, this form has been disabled.").'</p>';
-		echo '<hr>';
 	}
 }
 
@@ -830,17 +827,18 @@ if( $press_request == TRUE )
 
 if( $monetize >= 1 )
 {
+	echo '<hr>';
 	echo '<h2 id="monetize">'. tl('Monetization Permission') .'</h2>';
 	if( $monetize == 1 ) echo('<p>'. tl('%s does currently not allow for the contents of %s to be published through video broadcasting services.', COMPANY_TITLE, GAME_TITLE) .'</p>');
 	if( $monetize == 2 ) echo('<p>'. tl('%s does allow the contents of this game to be published through video broadcasting services only with direct written permission from %s. Check at the bottom of this page for contact information.', COMPANY_TITLE, GAME_TITLE) .'</p>');
 	if( $monetize == 3 ) echo('<p>'. tl('%s allows for the contents of %s to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from %s is not allowed.', COMPANY_TITLE, GAME_TITLE, GAME_TITLE) .'</p>');
 	if( $monetize == 4 ) echo('<p>'. tl('%s allows for the contents of %s to be published through video broadcasting services for any commercial or non-commercial purposes. Monetization of videos created containing assets from %s is legally & explicitly allowed by %s.', COMPANY_TITLE, GAME_TITLE, GAME_TITLE, COMPANY_TITLE) .' '. tlHtml('This permission can be found in writing at <a href="%s">%s</a>.', 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'], 'http://'. $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']) .'</p>');
-	echo '<hr>';
 }
 
 
 if( count($additionals) > 0 )
 {
+	echo '<hr>';
     echo '					<h2 id="links">'. tl('Additional Links'). '</h2>';
 }
 		
