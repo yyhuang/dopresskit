@@ -387,9 +387,9 @@ if (count(TranslateTool::getLanguages()) > 1) {
 }
 		
 echo '					<li><a href="#factsheet">'. tl('Factsheet') .'</a></li>
-						<li><a href="#description">'. tl('Description') .'</a></li>
-						<li><a href="#history">'. tl('History') .'</a></li>
-						<li><a href="#projects">'. tl('Projects') .'</a></li>
+                        <li><a href="#description">'. tl('Description') .'</a></li>';
+if( defined("GAME_HISTORY") ) echo('<li><a href="#history">'. tl('History') .'</a></li>');
+echo '					<li><a href="#projects">'. tl('Projects') .'</a></li>
 						<li><a href="#trailers">'. tl('Videos') .'</a></li>
 						<li><a href="#images">'. tl('Images') .'</a></li>
 						<li><a href="#logo">'. tl('Logo & Icon') .'</a></li>';
@@ -397,8 +397,8 @@ if( count($promoterawards) + count($awards) > 0 ) echo('<li><a href="#awards">'.
 if( count($promoterquotes) + count($quotes) > 0 ) echo('<li><a href="#quotes">'. tl('Selected Articles') .'</a></li>');
 if( $press_request == TRUE) { echo '<li><a href="#preview">'. tl('Request Press Copy') .'</a></li>'; }
 if( $monetize >= 1) { echo '<li><a href="#monetize">'. tl('Monetization Permission') .'</a></li>'; }
-echo '						<li><a href="#links">'. tl('Additional Links') .'</a></li>
-						<li><a href="#about">'. tl('About %s', COMPANY_TITLE) .'</a></li>
+if( count($additionals) > 0 ) echo('<li><a href="#links">'. tl('Additional Links') .'</a></li>');
+echo '						<li><a href="#about">'. tl('About %s', COMPANY_TITLE) .'</a></li>
 						<li><a href="#credits">'. tl('Team') .'</a></li>
 						<li><a href="#contact">'. tl('Contact') .'</a></li>
 					</ul>
@@ -483,9 +483,9 @@ foreach($descriptions as $text) {
 	echo '<p>'.$text.'</p>';
 }
 
-echo'<h2 id="history">'. tl('History'). '</h2>';
 
 if( defined("GAME_HISTORY") ) {
+    echo'<h2 id="history">'. tl('History'). '</h2>';
 	echo '<p>'. GAME_HISTORY .'</p>';
 }
 
@@ -717,7 +717,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 {
 	echo '					<hr>
 			
-						<h2>'. tl('Selected Articles') .'</h2>
+						<h2 id="quotes">'. tl('Selected Articles') .'</h2>
 						<ul>';
 
 	if( count($promoterquotes) >= 0 )
@@ -768,6 +768,7 @@ if( count($promoterquotes) + count($quotes) > 0 )
 }
 
 
+/*
 if( $press_request == TRUE )
 {
 	echo '<hr>';
@@ -793,7 +794,7 @@ if( $press_request == TRUE )
 }
 
 
-/*if( $press_request == TRUE )
+if( $press_request == TRUE )
 {
 	echo '<h2 id="preview">'. tl('Request Press Copy') .'</h2>
 <p>'. tl('Please fill in your e-mail address below and we\'ll get back to you as soon as a press copy is available for you.') .'<br/>
