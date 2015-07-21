@@ -200,6 +200,7 @@ foreach( $xml->children() as $child )
 			define("GAME_HISTORY", $child);
 			break;
 		case("histories"):
+			define("GAME_HISTORY", $child);
 			$histories = array();
 			$i = 0;
 			foreach( $child->children() as $subchild )
